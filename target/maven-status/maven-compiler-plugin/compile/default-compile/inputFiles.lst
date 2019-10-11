@@ -1,0 +1,9 @@
+/home/fibonach/Documents/Java/spring-mvc-default-master/src/main/java/beans/configuration/DbSessionFactory.java
+/home/fibonach/Documents/Java/spring-mvc-default-master/src/main/java/beans/configuration/SpringWebConfig.java
+/home/fibonach/Documents/Java/spring-mvc-default-master/src/main/java/beans/AppPages.java
+/home/fibonach/Documents/Java/spring-mvc-default-master/src/main/java/beans/repository/UserRepository.java
+/home/fibonach/Documents/Java/spring-mvc-default-master/src/main/java/beans/exception/SomethingWrongException.java
+/home/fibonach/Documents/Java/spring-mvc-default-master/src/main/java/beans/service/AppService.java
+/home/fibonach/Documents/Java/spring-mvc-default-master/src/main/java/beans/entity/User.java
+/home/fibonach/Documents/Java/spring-mvc-default-master/src/main/java/beans/controller/App.java
+/home/fibonach/Documents/Java/spring-mvc-default-master/src/main/java/beans/configuration/DataSourceConfiguration.java

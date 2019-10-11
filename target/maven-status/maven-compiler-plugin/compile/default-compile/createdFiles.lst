@@ -1,0 +1,10 @@
+beans/configuration/DbSessionFactory.class
+beans/repository/UserRepository.class
+beans/configuration/SpringWebConfig.class
+beans/service/AppService.class
+beans/configuration/DbSessionFactory$1.class
+beans/configuration/DataSourceConfiguration.class
+beans/controller/App.class
+beans/entity/User.class
+beans/AppPages.class
+beans/exception/SomethingWrongException.class
