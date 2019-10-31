@@ -11,4 +11,5 @@ public interface UserRepository {
     User getUserByID(Integer id);
     boolean removeUser(Integer id);
     boolean editExistingUser(User user);
+    public User getUserByName(String name);
 }

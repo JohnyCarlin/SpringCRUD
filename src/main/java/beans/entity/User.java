@@ -1,9 +1,14 @@
 package beans.entity;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,12 +27,13 @@ public class User {
     private String country;
 
     @Column
-    private String role;
+    @Autowired
+    private Role role;
 
     public User() {
     }
 
-    public User(String name, String password, String email, String country, String role) {
+    public User(String name, String password, String email, String country, Role role) {
         this.name = name;
         this.password = password;
         this.email = email;
@@ -35,7 +41,7 @@ public class User {
         this.role = role;
     }
 
-    public Integer getId() {
+    public Integer getUserId() {
         return id;
     }
 
@@ -43,7 +49,7 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
+    public String getUsername() {
         return name;
     }
 
@@ -59,7 +65,7 @@ public class User {
         this.password = password;
     }
 
-    public String getEmail() {
+    public String getUserEmail() {
         return email;
     }
 
@@ -67,7 +73,7 @@ public class User {
         this.email = email;
     }
 
-    public String getCountry() {
+    public String getUserCountry() {
         return country;
     }
 
@@ -75,11 +81,11 @@ public class User {
         this.country = country;
     }
 
-    public String getRole() {
+    public Role getUserRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
@@ -93,5 +99,30 @@ public class User {
                 ", country='" + country + '\'' +
                 ", role='" + role + '\'' +
                 '}';
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

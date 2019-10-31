@@ -3,6 +3,10 @@ package beans.service;
 import beans.entity.User;
 import beans.exception.SomethingWrongException;
 import beans.repository.UserRepository;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,7 +14,8 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Service
-public class UserServiceImpl implements UserService {
+@Transactional
+public class UserServiceImpl implements UserService, UserDetailsService, GrantedAuthority {
 
     private final UserRepository userRepository;
 
@@ -18,7 +23,7 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-    @Transactional
+
     public void addNewUser(User user) throws SomethingWrongException {
         if (Objects.isNull(user)) {
             throw new SomethingWrongException("Provided user is null");
@@ -26,22 +31,18 @@ public class UserServiceImpl implements UserService {
         userRepository.addNewUser(user);
     }
 
-    @Transactional
     public Collection<User> getAllUsers() {
         return userRepository.getAllUsers();
     }
 
-    @Transactional
     public User getUserByID(Integer id) {
         return userRepository.getUserByID(id);
     }
 
-    @Transactional
     public boolean removeUser(Integer id) {
         return userRepository.removeUser(id);
     }
 
-    @Transactional
     public boolean editExistingUser(User user) throws SomethingWrongException {
         if (Objects.isNull(user)) {
             throw new SomethingWrongException("Provided user is null");
@@ -49,5 +50,13 @@ public class UserServiceImpl implements UserService {
         return userRepository.editExistingUser(user);
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return userRepository.getUserByName(s);
+    }
 
+    @Override
+    public String getAuthority() {
+        return null;
+    }
 }

@@ -3,6 +3,7 @@ package beans.repository;
 import beans.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -27,13 +28,13 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     public User getUserByID(Integer id) {
-        return sessionFactory.getCurrentSession().byId(User.class).load(id);
+        return (User) sessionFactory.getCurrentSession().byId(User.class).load(id);
     }
 
     public boolean removeUser(Integer id) {
 
         Session session = sessionFactory.getCurrentSession();
-        User user = session.byId(User.class).load(id);
+        User user = (User) session.byId(User.class).load(id);
         session.delete(user);
         return true;
     }
@@ -43,4 +44,6 @@ public class UserRepositoryImpl implements UserRepository {
         session.update(user);
         return true;
     }
+
+    public User getUserByName(String name) {return (User) sessionFactory.getCurrentSession().createCriteria(User.class).add(Restrictions.like("name", name)).uniqueResult();}
 }
