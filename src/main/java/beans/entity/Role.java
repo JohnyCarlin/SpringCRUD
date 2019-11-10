@@ -3,16 +3,14 @@ package beans.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ROLE")
+@Table(name = "roles")
 public class Role {
 
     @Id
-    @Column(name = "ROLE")
-    private String role;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-    @ManyToMany
-    @JoinColumn(name = "NAME")
-    private User user;
+    private String role;
 
     public String getRole() {
         return role;
@@ -22,11 +20,10 @@ public class Role {
         this.role = role;
     }
 
-    public User getUser() {
-        return user;
+    public Role() {
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public Role(String role) {
+        this.role = role;
     }
 }

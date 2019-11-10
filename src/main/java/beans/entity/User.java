@@ -8,16 +8,17 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
+@Table(name = "users")
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column
+    @Column(name = "name", unique = true)
     private String name;
 
-    @Column
+    @Column(name = "password")
     private String password;
 
     @Column
@@ -26,8 +27,10 @@ public class User implements UserDetails {
     @Column
     private String country;
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "roles", joinColumns = {@JoinColumn(name = "id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name="id", referencedColumnName="id")})
+
     @Column
-    @Autowired
     private Role role;
 
     public User() {
