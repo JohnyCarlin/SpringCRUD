@@ -35,11 +35,11 @@ public class UserServiceImpl implements UserService, UserDetailsService, Granted
         return userRepository.getAllUsers();
     }
 
-    public User getUserByID(Integer id) {
+    public User getUserByID(Long id) {
         return userRepository.getUserByID(id);
     }
 
-    public boolean removeUser(Integer id) {
+    public boolean removeUser(Long id) {
         return userRepository.removeUser(id);
     }
 

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.SpringHandlerInstantiator;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -18,7 +19,7 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 public class SpringWebConfig implements WebMvcConfigurer {
 
-    @Bean
+        @Bean
     public ViewResolver beanNameViewResolver() {
         return new BeanNameViewResolver();
     }

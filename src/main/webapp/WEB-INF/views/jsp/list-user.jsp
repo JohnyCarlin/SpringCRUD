@@ -30,17 +30,17 @@
 
         <c:forEach var="user" items="${users}">
             <tr>
-                <td><${user.id}></td>
-                <td><c:out value="${user.name}" /></td>
+                <td><c:out value="${user.userId}" /></td>
+                <td><c:out value="${user.username}" /></td>
                 <td><c:out value="${user.password}" /></td>
-                <td><c:out value="${user.email}" /></td>
-                <td><c:out value="${user.country}" /></td>
-                <td><c:out value="${user.role}" /></td>
+                <td><c:out value="${user.userEmail}" /></td>
+                <td><c:out value="${user.userCountry}" /></td>
+                <td><c:out value="${user.userRole}" /></td>
 
                 <td>
-                    <a href="edit?id=<c:out value='${user.id}' />">Edit</a>
+                    <a href="edit?id=<c:out value='${user.userId}' />">Edit</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="delete?id=<c:out value='${user.id}' />">Delete</a>
+                    <a href="delete?id=<c:out value='${user.userId}' />">Delete</a>
                 </td>
             </tr>
         </c:forEach>

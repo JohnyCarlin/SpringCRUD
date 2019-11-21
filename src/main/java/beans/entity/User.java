@@ -1,19 +1,25 @@
 package beans.entity;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+//    @SequenceGenerator(name="seq",sequenceName="oracle_seq")
+//    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
+    private Long id;
 
     @Column(name = "name", unique = true)
     private String name;
@@ -27,16 +33,16 @@ public class User implements UserDetails {
     @Column
     private String country;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "roles", joinColumns = {@JoinColumn(name = "id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name="id", referencedColumnName="id")})
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Role.class)
+    @JoinTable(name = "userroles", joinColumns = {@JoinColumn(name = "id_user", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name="id_role", referencedColumnName="id")})
 
     @Column
-    private Role role;
+    private Collection<Role> role;
 
     public User() {
     }
 
-    public User(String name, String password, String email, String country, Role role) {
+    public User(String name, String password, String email, String country, List<Role> role) {
         this.name = name;
         this.password = password;
         this.email = email;
@@ -44,11 +50,11 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -84,11 +90,11 @@ public class User implements UserDetails {
         this.country = country;
     }
 
-    public Role getUserRole() {
-        return role;
+    public String getUserRole() {
+        return StringUtils.collectionToCommaDelimitedString(role);
     }
 
-    public void setRole(Role role) {
+    public void setRole(List<Role> role) {
         this.role = role;
     }
 
@@ -100,7 +106,7 @@ public class User implements UserDetails {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", country='" + country + '\'' +
-                ", role='" + role + '\'' +
+                ", role='" + role.toString() + '\'' +
                 '}';
     }
 

@@ -27,11 +27,11 @@ public class UserRepositoryImpl implements UserRepository {
         return sessionFactory.getCurrentSession().createCriteria(User.class).list();
     }
 
-    public User getUserByID(Integer id) {
+    public User getUserByID(Long id) {
         return (User) sessionFactory.getCurrentSession().byId(User.class).load(id);
     }
 
-    public boolean removeUser(Integer id) {
+    public boolean removeUser(Long id) {
 
         Session session = sessionFactory.getCurrentSession();
         User user = (User) session.byId(User.class).load(id);

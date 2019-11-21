@@ -8,8 +8,8 @@ public interface UserRepository {
 
     void addNewUser(User user);
     Collection<User> getAllUsers();
-    User getUserByID(Integer id);
-    boolean removeUser(Integer id);
+    User getUserByID(Long id);
+    boolean removeUser(Long id);
     boolean editExistingUser(User user);
     public User getUserByName(String name);
 }

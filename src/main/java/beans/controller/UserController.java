@@ -27,7 +27,19 @@ public class UserController {
     public ModelAndView getHome() throws SomethingWrongException {
         ModelMap modelMap = new ModelMap();
         modelMap.addAttribute("users", userService.getAllUsers());
-        return new ModelAndView(AppPages.LIST, modelMap);
+        return new ModelAndView(AppPages.LOGIN, modelMap);
+    }
+
+    @GetMapping("/login")
+    public ModelAndView getLogin() throws SomethingWrongException {
+        ModelMap modelMap = new ModelMap();
+        return new ModelAndView(AppPages.LOGIN, modelMap);
+    }
+
+    @GetMapping("/logout")
+    public ModelAndView getLogout() throws SomethingWrongException {
+        ModelMap modelMap = new ModelMap();
+        return new ModelAndView(AppPages.LOGIN, modelMap);
     }
 
     @GetMapping("new")
@@ -36,14 +48,14 @@ public class UserController {
     }
 
     @GetMapping("edit")
-    public ModelAndView getEdit(@ModelAttribute("id") Integer id) throws SomethingWrongException {
+    public ModelAndView getEdit(@ModelAttribute("id") Long id) throws SomethingWrongException {
         ModelMap modelMap = new ModelMap();
         modelMap.addAttribute("user", userService.getUserByID(id));
         return new ModelAndView(AppPages.CREATE, modelMap);
     }
 
     @GetMapping("delete")
-    public String getDelete(@ModelAttribute("id") Integer id) throws SomethingWrongException {
+    public String getDelete(@ModelAttribute("id") Long id) throws SomethingWrongException {
         userService.removeUser(id);
         return AppPages.redirect(AppPages.LIST);
     }

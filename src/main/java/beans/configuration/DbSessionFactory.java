@@ -1,7 +1,7 @@
 package beans.configuration;
 
+import beans.entity.Role;
 import beans.entity.User;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,8 +33,11 @@ public class DbSessionFactory {
     @Value("${hibernate.hbm2ddl.auto}")
     private String hbm2ddlAuto;
 
-    @Bean
-    public LocalSessionFactoryBean sessionFactory() {
+
+
+    @Autowired
+    @Bean(name = "sessionFactory")
+    public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
         localSessionFactoryBean.setDataSource(dataSource);
         localSessionFactoryBean.setHibernateProperties(new Properties() {{
@@ -42,7 +45,8 @@ public class DbSessionFactory {
             setProperty("hibernate.show_sql", showSql);
             setProperty("hibernate.hbm2ddl.auto", hbm2ddlAuto);
         }});
-        localSessionFactoryBean.setAnnotatedClasses(User.class);
+
+        localSessionFactoryBean.setAnnotatedClasses(User.class, Role.class);
         return localSessionFactoryBean;
     }
 

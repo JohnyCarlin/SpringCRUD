@@ -9,7 +9,7 @@ public interface UserService {
 
     void addNewUser(User user) throws SomethingWrongException;
     Collection<User> getAllUsers() throws SomethingWrongException;
-    User getUserByID(Integer id) throws SomethingWrongException;
-    boolean removeUser(Integer id) throws SomethingWrongException;
+    User getUserByID(Long id) throws SomethingWrongException;
+    boolean removeUser(Long id) throws SomethingWrongException;
     boolean editExistingUser(User user) throws SomethingWrongException;
 }

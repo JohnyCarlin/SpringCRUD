@@ -26,13 +26,13 @@
             <table border="1" cellpadding="5">
 
                 <c:if test="${user != null}">
-                    <input type="hidden" name="id" value="<c:out value='${user.id}' />" />
+                    <input type="hidden" name="id" value="<c:out value='${user.userId}' />" />
                 </c:if>
                 <tr>
                     <th>User Name: </th>
                     <td>
                         <input type="text" name="name" size="45"
-                               value="<c:out value='${user.name}' />"
+                               value="<c:out value='${user.username}' />"
                         />
                     </td>
                 </tr>
@@ -48,7 +48,7 @@
                     <th>User Email: </th>
                     <td>
                         <input type="text" name="email" size="45"
-                               value="<c:out value='${user.email}' />"
+                               value="<c:out value='${user.userEmail}' />"
                         />
                     </td>
                 </tr>
@@ -56,7 +56,7 @@
                     <th>Country: </th>
                     <td>
                         <input type="text" name="country" size="15"
-                               value="<c:out value='${user.country}' />"
+                               value="<c:out value='${user.userCountry}' />"
                         />
                     </td>
                 </tr>
@@ -64,7 +64,7 @@
                     <th>Role: </th>
                     <td>
                         <input type="text" name="role" size="15"
-                               value="<c:out value='${user.role}' />"
+                               value="<c:out value='${user.userRole}' />"
                         />
                     </td>
                 </tr>
