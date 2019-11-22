@@ -26,14 +26,27 @@ public class UserController {
     @GetMapping("/")
     public ModelAndView getHome() throws SomethingWrongException {
         ModelMap modelMap = new ModelMap();
-        modelMap.addAttribute("users", userService.getAllUsers());
         return new ModelAndView(AppPages.LOGIN, modelMap);
+    }
+
+    @GetMapping("/list")
+    public ModelAndView getList() throws SomethingWrongException {
+        ModelMap modelMap = new ModelMap();
+        modelMap.addAttribute("users", userService.getAllUsers());
+        return new ModelAndView(AppPages.LIST, modelMap);
     }
 
     @GetMapping("/login")
     public ModelAndView getLogin() throws SomethingWrongException {
         ModelMap modelMap = new ModelMap();
         return new ModelAndView(AppPages.LOGIN, modelMap);
+    }
+
+    @GetMapping("/user")
+    public ModelAndView getUser() throws SomethingWrongException {
+        ModelMap modelMap = new ModelMap();
+        modelMap.addAttribute("name", "USER");
+        return new ModelAndView(AppPages.USER, modelMap);
     }
 
     @GetMapping("/logout")

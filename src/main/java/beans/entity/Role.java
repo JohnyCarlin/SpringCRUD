@@ -1,17 +1,18 @@
 package beans.entity;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "roles")
-public class Role implements Serializable {
+public class Role implements GrantedAuthority {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @SequenceGenerator(name="seq",sequenceName="oracle_seq")
-//    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
+
     private Long id;
 
     @Column
@@ -38,6 +39,11 @@ public class Role implements Serializable {
 
     public Role(String role) {
         this.role = role;
+    }
+
+    @Override
+    public String getAuthority() {
+        return this.getRole();
     }
 
     @Override

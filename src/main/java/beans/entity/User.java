@@ -7,8 +7,6 @@ import org.springframework.util.StringUtils;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
@@ -48,6 +46,11 @@ public class User implements UserDetails {
         this.email = email;
         this.country = country;
         this.role = role;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.role;
     }
 
     public Long getUserId() {
@@ -110,10 +113,6 @@ public class User implements UserDetails {
                 '}';
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
 
     @Override
     public boolean isAccountNonExpired() {

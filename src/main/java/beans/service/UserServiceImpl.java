@@ -15,7 +15,7 @@ import java.util.Objects;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService, UserDetailsService, GrantedAuthority {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
 
@@ -53,10 +53,5 @@ public class UserServiceImpl implements UserService, UserDetailsService, Granted
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return userRepository.getUserByName(s);
-    }
-
-    @Override
-    public String getAuthority() {
-        return null;
     }
 }

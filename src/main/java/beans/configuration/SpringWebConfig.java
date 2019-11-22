@@ -19,7 +19,7 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 public class SpringWebConfig implements WebMvcConfigurer {
 
-        @Bean
+    @Bean
     public ViewResolver beanNameViewResolver() {
         return new BeanNameViewResolver();
     }
