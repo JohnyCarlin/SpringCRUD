@@ -7,7 +7,7 @@
     <title>UserPage</title>
 </head>
 <body>
-<h1 align="center">Hello, <c:out value='${name}' /></h1>
+<h1 align="center">Hello, <security:authentication property="principal.username" /></h1>
 <a href="/login" align="right">Logout</a>
 </body>
 </html>

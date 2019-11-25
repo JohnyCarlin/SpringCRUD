@@ -4,6 +4,9 @@ import beans.AppPages;
 import beans.entity.User;
 import beans.exception.SomethingWrongException;
 import beans.service.UserService;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +17,11 @@ public class UserController {
 
     private final UserService userService;
 
+    private PasswordEncoder passwordEncoder;
+
     public UserController(UserService userService) {
         this.userService = userService;
+        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     @GetMapping
@@ -38,6 +44,7 @@ public class UserController {
 
     @GetMapping("/login")
     public ModelAndView getLogin() throws SomethingWrongException {
+        System.out.println(BCrypt.hashpw(("2"),  BCrypt.gensalt(10)));
         ModelMap modelMap = new ModelMap();
         return new ModelAndView(AppPages.LOGIN, modelMap);
     }
@@ -76,6 +83,7 @@ public class UserController {
     @PostMapping("update")
     public String updateUser(@ModelAttribute("user") User user) throws SomethingWrongException {
         System.out.println(user);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.editExistingUser(user);
         return AppPages.redirect(AppPages.LIST);
     }
@@ -83,6 +91,7 @@ public class UserController {
     @PostMapping("insert")
     public String insertUser(@ModelAttribute("user") User user) throws SomethingWrongException {
         System.out.println(user);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.addNewUser(user);
         return AppPages.redirect(AppPages.LIST);
     }
