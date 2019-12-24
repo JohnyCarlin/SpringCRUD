@@ -4,6 +4,7 @@ import beans.AppPages;
 import beans.entity.User;
 import beans.exception.SomethingWrongException;
 import beans.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,11 +18,11 @@ public class UserController {
 
     private final UserService userService;
 
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     public UserController(UserService userService) {
         this.userService = userService;
-        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     @GetMapping
